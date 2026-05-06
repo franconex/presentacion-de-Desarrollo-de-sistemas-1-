@@ -154,9 +154,23 @@ tr:hover td{background:rgba(0,212,255,0.03)}
     .sprint-timeline { grid-template-columns: repeat(3, 1fr) !important; }
 }
 @media print {
-    @page { size: landscape; margin: 0; }
-    html, body { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; overflow: visible !important; height: auto !important; }
-    .presentation { position: static !important; height: auto !important; overflow: visible !important; }
+    @page { 
+        size: 1400px 900px; 
+        margin: 0; 
+    }
+    html, body { 
+        background: var(--primary) !important; 
+        -webkit-print-color-adjust: exact !important; 
+        print-color-adjust: exact !important; 
+        overflow: visible !important; 
+        height: auto !important;
+        width: 1400px !important;
+    }
+    .presentation { 
+        position: static !important; 
+        height: auto !important; 
+        overflow: visible !important; 
+    }
     .slide { 
         position: relative !important; 
         display: flex !important; 
@@ -165,15 +179,50 @@ tr:hover td{background:rgba(0,212,255,0.03)}
         transform: none !important; 
         page-break-after: always !important; 
         break-after: page !important;
-        height: 100vh !important;
-        width: 100vw !important;
+        height: 900px !important;
+        width: 1400px !important;
         top: 0 !important;
         left: 0 !important;
         background: var(--grad1) !important;
+        padding: 60px 100px !important;
+        border: none !important;
     }
-    .anim { opacity: 1 !important; transform: none !important; animation: none !important; }
-    .nav-hint, .fullscreen-btn, .progress-bar, .slide-number { display: none !important; }
-    .slide-content { justify-content: center !important; }
+    /* Asegurar que los efectos de fondo (brillos y rejilla) se impriman */
+    .slide::before, .slide::after {
+        content: '' !important;
+        display: block !important;
+        position: absolute !important;
+        top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+        z-index: -1 !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+    .anim { 
+        opacity: 1 !important; 
+        transform: none !important; 
+        animation: none !important; 
+        visibility: visible !important;
+    }
+    .nav-hint, .fullscreen-btn, .progress-bar { display: none !important; }
+    .slide-number { 
+        bottom: 40px !important; 
+        right: 50px !important; 
+        color: var(--text-muted) !important;
+        font-size: 12px !important;
+        display: block !important;
+    }
+    .slide-content { 
+        justify-content: center !important; 
+        height: 100% !important;
+        width: 100% !important;
+    }
+    h1, h2, h3, p, span, strong, td, th {
+        -webkit-print-color-adjust: exact !important;
+    }
+    .card, .tech-item, .sprint-card, .role-card, .db-table {
+        break-inside: avoid !important;
+        background: rgba(26,45,74,0.8) !important;
+        border: 1px solid rgba(0,212,255,0.2) !important;
+    }
 }
 </style>
 </head>
